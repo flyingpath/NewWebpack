@@ -5,7 +5,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const fs = require('fs-extra')
 
 
-console.log('打包pro');
+console.log('打包pro'); 
 
 fs.removeSync('dist/public') 
 fs.mkdir('dist/public', ()=>{})
