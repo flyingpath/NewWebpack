@@ -8,7 +8,7 @@ fs.removeSync('dev/public')
 fs.mkdir('dev/public', ()=>{})
 fs.mkdir('dev/public/source', ()=>{})
 
-module.exports = {
+module.exports = { 
     entry: [
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://0.0.0.0:9487',
