@@ -4,11 +4,11 @@ const fs = require('fs-extra');
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 console.log('打包dev');
 
-fs.removeSync('dev/public') 
+fs.removeSync('dev/public')
 fs.mkdir('dev/public', ()=>{})
 fs.mkdir('dev/public/source', ()=>{})
 
-module.exports = { 
+module.exports = {
     entry: [
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://0.0.0.0:9487',
@@ -26,6 +26,7 @@ module.exports = {
         contentBase: resolve(__dirname, 'dev'),
         publicPath: '/public',
         hot: true,
+        disableHostCheck: true
     },
     devtool: 'inline-source-map',
     module: {
@@ -52,10 +53,10 @@ module.exports = {
             //     ],
             // },
             {      
-                test: /^((?!\.global).)*\.css$/,
+                test: /\.css$/,
                 loader: ExtractTextPlugin.extract({         // 把 css 另外打包的 plugin
                     fallback: 'style-loader',
-                    use: 'css-loader?modules!postcss-loader', // 把'?modules'移掉就不會用 css modules
+                    use: 'css-loader!postcss-loader', // 把'?modules'移掉就不會用 css modules
                 })
             },
             // {
@@ -71,14 +72,7 @@ module.exports = {
                 test: /\.scss$/, //-- 可以直接用scss... 但不知道跟 css 另外打包的 plugin 會不會衝到，要再研究，先不用
                 loader: ExtractTextPlugin.extract({        
                     fallback: 'style-loader',
-                    use: 'css-loader?modules!postcss-loader!sass-loader', 
-                })
-            },
-            {
-                test: /\.global\.css$/,  // anything with .global will not go through css modules loader
-                loaders: ExtractTextPlugin.extract({        
-                    fallback: 'style-loader',
-                    use: 'css-loader!postcss-loader', 
+                    use: 'css-loader!postcss-loader!sass-loader', 
                 })
             },
             {
@@ -99,6 +93,6 @@ module.exports = {
     plugins: [    
       new webpack.HotModuleReplacementPlugin(), //-- react 的 hotreload plugin
       new webpack.NamedModulesPlugin(),
-      new ExtractTextPlugin("styles.css"),
+      new ExtractTextPlugin("styles.css")
     ],
 }
