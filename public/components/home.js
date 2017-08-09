@@ -3,6 +3,8 @@ import { observer } from 'mobx-react'
 import mobx from 'mobx'
 import _ from 'lodash'
 
+import dataStore from '../stores/data'
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
