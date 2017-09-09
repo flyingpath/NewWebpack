@@ -28,7 +28,7 @@ module.exports = {
         hot: true,
         disableHostCheck: true
     },
-    devtool: 'inline-source-map',
+    devtool: 'eval-source-map',
     module: {
         rules: [
             // {

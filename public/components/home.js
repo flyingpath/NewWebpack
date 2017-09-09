@@ -15,10 +15,20 @@ class Home extends React.Component {
     clickSend(){
     }
 
+    componentDidMount(){
+        let body = document.querySelector('#body')
+        let text = body.innerHTML
+        const replaceText = 'sword'
+        text = text.replace(replaceText, `<span style="color:red">${replaceText}<span>`)
+        body.innerHTML = text
+    }
     render() {
         return (
             <div>
              Hello
+             <div id='body'>
+                 you have my sword
+             </div>
             </div>
         )
     }
