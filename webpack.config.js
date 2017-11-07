@@ -1,9 +1,9 @@
 function buildConfig(env) {
-  if(env === 'pro'){
-		const rtn = require('./' + env + '.js')
+  if(env.type === 'pro'){
+		const rtn = require('./pro.js')
 		return rtn
 	}else{
-		const rtn = require('./dev.js')
+		const rtn = require('./dev.js')(env)
 		return rtn
 	}
 }
