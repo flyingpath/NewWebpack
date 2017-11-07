@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const fs = require('fs-extra');
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const DashboardPlugin = require('webpack-dashboard/plugin')
 
 devPack = env => {
     console.log('打包dev')
@@ -77,12 +78,13 @@ devPack = env => {
             ],
         },
         plugins: [
+            new DashboardPlugin( {port: port } ),
             new webpack.HotModuleReplacementPlugin(), //-- react 的 hotreload plugin
             new webpack.NamedModulesPlugin(),
             new ExtractTextPlugin("styles.css"),
             new webpack.DefinePlugin(
                 {
-                    'process.env': { 'NODE_ENV': 'develope' }
+                    'process.env': { 'NODE_ENV': JSON.stringify('develope') }
                 }
             ),
         ]
