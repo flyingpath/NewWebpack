@@ -82,7 +82,7 @@ devPack = env => {
             new ExtractTextPlugin("styles.css"),
             new webpack.DefinePlugin(
                 {
-                    'process.env': { 'NODE_ENV': 'develope' }
+                    'process.env': { 'NODE_ENV': JSON.stringify('develope') }
                 }
             ),
         ]
