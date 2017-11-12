@@ -3,7 +3,8 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const fs = require('fs-extra')
-
+const OfflinePlugin = require('offline-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 console.log('打包pro'); 
 
@@ -27,15 +28,6 @@ module.exports = {
                 ],
                 exclude: /node_modules/
             },
-            // {
-            //     test: /\.scss$/, //-- 可以直接用scss... 但不知道跟 css 另外打包的 plugin 會不會衝到，要再研究，先不用
-            //     use: [
-            //         'style-loader',
-            //         'css-loader',
-            //         'postcss-loader',
-            //         'sass-loader'
-            //     ],
-            // },
             {      
                 test: /^((?!\.global).)*\.css$/,
                 loader: ExtractTextPlugin.extract({         // 把 css 另外打包的 plugin
@@ -95,7 +87,23 @@ module.exports = {
             cssProcessorOptions: { discardComments: {removeAll: true } },
             canPrint: true
         }),
-		new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new HtmlWebpackPlugin({
+            template: 'index.html'
+        }),
+        new OfflinePlugin({
+            publicPath: '/',
+            caches: {
+                main: [
+                    'index.html'
+                ]
+            },
+            externals: [
+            ],
+            ServiceWorker: {
+                navigateFallbackURL: '/'
+            }
+        })
 	]
 }
 

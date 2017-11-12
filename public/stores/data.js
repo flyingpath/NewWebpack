@@ -4,7 +4,6 @@ import _ from 'lodash'
 
 class DataStore {
     @observable data = []
-
     @action
     load = ()=> {
         this.loaddata()

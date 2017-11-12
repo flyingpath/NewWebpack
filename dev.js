@@ -1,14 +1,16 @@
-const { resolve } = require('path');
-const webpack = require('webpack');
-const fs = require('fs-extra');
+const { resolve } = require('path')
+const webpack = require('webpack')
+const fs = require('fs-extra')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const OfflinePlugin = require('offline-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 devPack = env => {
     console.log('打包dev')
     fs.removeSync('dev/public')
     fs.mkdir('dev/public', () => { })
     fs.mkdir('dev/public/source', () => { })
-    
+
     const port = env.port
 
     return {
@@ -85,8 +87,24 @@ devPack = env => {
                     'process.env': { 'NODE_ENV': JSON.stringify('develope') }
                 }
             ),
+            new HtmlWebpackPlugin({
+                template: 'index.html'
+            }),
+            new OfflinePlugin({
+                publicPath: '/',
+                caches: {
+                    main: [
+                        'index.html'
+                    ]
+                },
+                externals: [
+                ],
+                ServiceWorker: {
+                    navigateFallbackURL: '/'
+                }
+            })
         ]
     }
 }
 
-module.exports= devPack
+module.exports = devPack
