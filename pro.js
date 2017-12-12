@@ -35,23 +35,16 @@ module.exports = {
             //         'postcss-loader',
             //         'sass-loader'
             //     ],
-            // },
-            {      
-                test: /^((?!\.global).)*\.css$/,
-                loader: ExtractTextPlugin.extract({         // 把 css 另外打包的 plugin
-                    fallback: 'style-loader',
-                    use: 'css-loader?modules!postcss-loader', // 把'?modules'移掉就不會用 css modules
-                })
-            },
+            // }
             {
                 test: /\.scss$/, //-- 可以直接用scss... 但不知道跟 css 另外打包的 plugin 會不會衝到，要再研究，先不用
                 loader: ExtractTextPlugin.extract({        
                     fallback: 'style-loader',
-                    use: 'css-loader?modules!postcss-loader!sass-loader', 
+                    use: 'css-loader!postcss-loader!sass-loader', 
                 })
             },
             {
-                test: /\.global\.css$/,  // anything with .global will not go through css modules loader
+                test: /\.css$/,  // anything with .global will not go through css modules loader
                 loaders: ExtractTextPlugin.extract({        
                     fallback: 'style-loader',
                     use: 'css-loader!postcss-loader', 
