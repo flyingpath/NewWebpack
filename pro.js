@@ -27,24 +27,15 @@ module.exports = {
                 ],
                 exclude: /node_modules/
             },
-            // {
-            //     test: /\.scss$/, //-- 可以直接用scss... 但不知道跟 css 另外打包的 plugin 會不會衝到，要再研究，先不用
-            //     use: [
-            //         'style-loader',
-            //         'css-loader',
-            //         'postcss-loader',
-            //         'sass-loader'
-            //     ],
-            // }
             {
-                test: /\.scss$/, //-- 可以直接用scss... 但不知道跟 css 另外打包的 plugin 會不會衝到，要再研究，先不用
+                test: /\.scss$/, 
                 loader: ExtractTextPlugin.extract({        
                     fallback: 'style-loader',
                     use: 'css-loader!postcss-loader!sass-loader', 
                 })
             },
             {
-                test: /\.css$/,  // anything with .global will not go through css modules loader
+                test: /\.css$/,
                 loaders: ExtractTextPlugin.extract({        
                     fallback: 'style-loader',
                     use: 'css-loader!postcss-loader', 
