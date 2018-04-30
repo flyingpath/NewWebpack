@@ -5,6 +5,8 @@ import _ from 'lodash'
 
 import dataStore from '../stores/data'
 
+import '../css/style.css'
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -16,19 +18,13 @@ class Home extends React.Component {
     }
 
     componentDidMount(){
-        let body = document.querySelector('#body')
-        let text = body.innerHTML
-        const replaceText = 'sword'
-        text = text.replace(replaceText, `<span style="color:red">${replaceText}<span>`)
-        body.innerHTML = text
     }
     render() {
         return (
-            <div>
-             Hello
-             <div id='body'>
-                 you have my sword
-             </div>
+            <div ref={(div)=>{this.backgroundDiv=div}}>
+                <div className="item" ref={(div)=>{this.body=div}}>
+                    哈囉你好嗎
+                </div>
             </div>
         )
     }
