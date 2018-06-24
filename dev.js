@@ -37,6 +37,12 @@ devPack = env => {
         devtool: 'eval-source-map',
         module: {
             rules: [
+                // {
+                //     enforce: "pre",
+                //     test: /\.js$/,
+                //     exclude: /node_modules/,
+                //     loader: "eslint-loader",
+                // },  
                 {
                     test: /\.(js|jsx)$/,
                     use: [
@@ -82,12 +88,7 @@ devPack = env => {
             new MiniCssExtractPlugin({
                 filename: "styles.css",
                 chunkFilename: "[id].css"
-            }),
-            new webpack.DefinePlugin(
-                {
-                    'process.env': { 'NODE_ENV': JSON.stringify('development') }
-                }
-            )
+            })
         ]
     }
 }

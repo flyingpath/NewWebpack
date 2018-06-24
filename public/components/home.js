@@ -12,13 +12,13 @@ class Home extends React.Component {
         super(props);
         this.state = {
         }
-        this.clickSend = this.clickSend.bind(this)
     }
-    clickSend(){
+    clickSend = ()=> {
     }
 
     componentDidMount(){
     }
+    
     render() {
         return (
             <div ref={(div)=>{this.backgroundDiv=div}}>
