@@ -32,6 +32,83 @@ html, body, #app{
     left:0px;
     top:0px;
 }
+
 .item:hover::before{
     width:0%;
+}
+
+#home{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p {
+    font-size: 150%;
+}
+
+textarea {
+    resize: vertical; /* user can resize vertically, but width is fixed */
+    width: 250px;
+}
+
+input {
+    width: 250px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+} 
+
+.autoInput{
+    color: gray;
+}
+
+.labelCol{
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+    text-align: left;
+    align-items: center;
+}
+
+.valueCol{
+    width: 250px;
+    word-break: break-all;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+} 
+
+.IMGS {
+    width: 400px;
+    margin: 5px;
+}
+
+.imageInput{
+    margin: 2px;
+}
+
+.footer{
+    margin: 10px;
+}
+
+.deleteImg{
+    font-weight: bold;
+    position: absolute;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    top: 0px;
+    right: 0px;
+    color: white;
+    background: #ff005f;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: fantasy;
 }
