@@ -1,8 +1,9 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const fs = require('fs-extra')
 
 
@@ -67,7 +68,7 @@ module.exports = {
                             name  : '[name]-[hash].[ext]',
                             outputPath : './source/',
                             publicPath : './source/',
-                            limit : 10,
+                            limit : 2048,
                         }
                     }
                 ]
@@ -75,6 +76,14 @@ module.exports = {
         ]
     },
     optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+              cache: true,
+              parallel: true,
+              sourceMap: true // set to true if you want JS source maps
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ],
         splitChunks: {
             chunks: "async",
             minChunks: 1,
@@ -95,14 +104,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "styles.css",
             chunkFilename: "chunks.css"
-        }),
-        new OptimizeCssAssetsPlugin({
-            assetNameRegExp: /\.css$/,
-            cssProcessor:require('cssnano')({
-                reduceIdents: false
-            }),
-            cssProcessorOptions: { discardComments: { removeAll: true } },
-            canPrint: true
         }),
         new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({  

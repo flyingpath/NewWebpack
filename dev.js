@@ -1,15 +1,15 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-const fs = require('fs-extra');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 devPack = env => {
 
     console.log('打包dev');
 
-    fs.removeSync('dev/public')
-    fs.mkdir('dev/public', () => { })
-    fs.mkdir('dev/public/source', () => { })
+    // fs.removeSync('dev/public')
+    // fs.mkdir('dev/public', () => { })
+    // fs.mkdir('dev/public/source', () => { })
 
     const port = env.port
 
@@ -70,15 +70,6 @@ devPack = env => {
                 {
                     test: /\.(png|gif|jpg|svg|eot|woff(2)?|ttf)?$/,
                     use: 'url-loader?name=source/[name]-[hash].[ext]',
-                },
-                {
-                    test: /\.html$/,
-                    use: [{
-                        loader: 'html-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }]
                 }
             ],
         },
@@ -88,6 +79,11 @@ devPack = env => {
             new MiniCssExtractPlugin({
                 filename: "styles.css",
                 chunkFilename: "[id].css"
+            }),
+            new HtmlWebpackPlugin({  
+                filename: 'index.html',
+                template: 'index.html',
+                title: 'NewWebpack',
             })
         ]
     }
