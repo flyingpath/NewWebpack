@@ -1,6 +1,7 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const fs = require('fs-extra')
 
@@ -18,7 +19,7 @@ module.exports = {
         // vendor: [ 'react', 'react-dom', 'mobx', 'mobx-react', 'material-ui', 'styled-components' ]
     },
     output: {
-        path: resolve( __dirname, 'dist/public' ),
+        path: resolve( __dirname, 'dist' ),
         filename: 'bundle.js',
         chunkFilename: "[name].chunk.js"
     },
@@ -59,16 +60,17 @@ module.exports = {
             },
             {
                 test: /\.(png|gif|jpg|svg|eot|woff(2)?|ttf)?$/,
-                use: 'url-loader?name=source/[name]-[hash].[ext]',
-            },
-            {
-                test: /\.html$/,
-                use: [ {
-                    loader: 'html-loader',
-                    options: {
-                        minimize: true
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            name  : '[name]-[hash].[ext]',
+                            outputPath : './source/',
+                            publicPath : './source/',
+                            limit : 10,
+                        }
                     }
-                }]
+                ]
             }
         ]
     },
