@@ -6,7 +6,7 @@ import dataStore from '../stores/data'
 
 import '../css/style.css'
 import Ali from '../pictures/ali.jpg'
-// import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css'
 
 class Home extends React.Component {
     constructor(props) {

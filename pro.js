@@ -8,9 +8,9 @@ const fs = require('fs-extra')
 
 console.log('打包pro');
 
-fs.removeSync('dist/public')
-fs.mkdir('dist/public', () => { })
-fs.mkdir('dist/public/source', () => { })
+// fs.removeSync('dist/public')
+// fs.mkdir('dist/public', () => { })
+// fs.mkdir('dist/public/source', () => { })
 
 module.exports = {
     
