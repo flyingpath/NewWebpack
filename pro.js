@@ -12,13 +12,15 @@ fs.mkdir('dist/public', () => { })
 fs.mkdir('dist/public/source', () => { })
 
 module.exports = {
-    entry: [
-        'babel-polyfill',
-        './index.js'
-    ],
+    
+    entry: {
+        main: ['babel-polyfill', './index.js'],
+        // vendor: [ 'react', 'react-dom', 'mobx', 'mobx-react', 'material-ui', 'styled-components' ]
+    },
     output: {
+        path: resolve( __dirname, 'dist/public' ),
         filename: 'bundle.js',
-        path: resolve(__dirname, 'dist/public'),
+        chunkFilename: "[name].chunk.js"
     },
     context: resolve(__dirname, 'public'),
     module: {
@@ -30,15 +32,6 @@ module.exports = {
                 ],
                 exclude: /node_modules/
             },
-            // {
-            //     test: /\.scss$/, //-- 可以直接用scss... 但不知道跟 css 另外打包的 plugin 會不會衝到，要再研究，先不用
-            //     use: [
-            //         'style-loader',
-            //         'css-loader',
-            //         'postcss-loader',
-            //         'sass-loader'
-            //     ],
-            // },
             {      
                 test: /^((?!\.global).)*\.css$/,
                 use: [
@@ -79,17 +72,33 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        splitChunks: {
+            chunks: "async",
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '~',
+            name: true,
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    chunks: "all"
+                }
+            }
+        }
+    },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        }),
         new MiniCssExtractPlugin({
             filename: "styles.css",
-            chunkFilename: "[id].css"
+            chunkFilename: "chunks.css"
         }),
         new OptimizeCssAssetsPlugin({
             assetNameRegExp: /\.css$/,
-            cssProcessor: require('cssnano'),
+            cssProcessor:require('cssnano')({
+                reduceIdents: false
+            }),
             cssProcessorOptions: { discardComments: { removeAll: true } },
             canPrint: true
         }),

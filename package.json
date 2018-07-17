@@ -43,7 +43,7 @@
     "moment": "^2.22.2",
     "moment-range": "^4.0.1",
     "node-sass": "^4.9.0",
-    "optimize-css-assets-webpack-plugin": "^4.0.2",
+    "optimize-css-assets-webpack-plugin": "^4.0.3",
     "postcss-global-import": "^1.0.6",
     "postcss-loader": "^2.1.5",
     "postcss-smart-import": "^0.7.6",
