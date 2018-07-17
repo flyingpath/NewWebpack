@@ -102,7 +102,12 @@ module.exports = {
             cssProcessorOptions: { discardComments: { removeAll: true } },
             canPrint: true
         }),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new HtmlWebpackPlugin({  
+            filename: 'index.html',
+            template: 'index.html',
+            title: 'NewWebpack',
+        })
     ]
 }
 
