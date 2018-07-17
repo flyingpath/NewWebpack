@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { observer } from 'mobx-react'
-import mobx from 'mobx'
+import { toJS } from 'mobx'
 import _ from 'lodash'
 
 import dataStore from '../stores/data'
 
 import '../css/style.css'
+import Ali from '../pictures/ali.jpg'
+// import 'semantic-ui-css/semantic.min.css'
 
 class Home extends React.Component {
     constructor(props) {
@@ -13,21 +14,18 @@ class Home extends React.Component {
         this.state = {
         }
     }
-    clickSend = ()=> {
-    }
 
-    componentDidMount(){
-    }
-    
+
     render() {
+        
         return (
-            <div ref={(div)=>{this.backgroundDiv=div}}>
-                <div className="item" ref={(div)=>{this.body=div}}>
-                    哈囉你好嗎
-                </div>
+            <div >
+                <img src={Ali} />
+                    <i aria-hidden="true" className="heart icon" ></i>
             </div>
         )
     }
+
 }
 
-export default observer(Home)
+export default Home
