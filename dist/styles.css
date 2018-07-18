@@ -1,0 +1,1 @@
+#app,body,html{height:100%;margin:0;padding:0;position:relative;width:100%}.item{padding:10px;position:relative;width:500px}.item:before{background:#fff;right:0;transition:width .5s;z-index:-1}.item:after,.item:before{content:" ";height:100%;position:absolute;top:0;width:100%}.item:after{background:linear-gradient(90deg,#fff,#1e90ff);left:0;z-index:-2}.item:hover:before{width:0}
