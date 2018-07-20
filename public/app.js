@@ -1,9 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { hot } from 'react-hot-loader'
 
 import Home from './components/home'
 
-class RenderForcer extends React.Component {
+class App extends React.Component {
   render() {
     return (
         <Home />
@@ -11,4 +11,4 @@ class RenderForcer extends React.Component {
   }
 }
 
-export default RenderForcer
+export default hot(module)(App)
