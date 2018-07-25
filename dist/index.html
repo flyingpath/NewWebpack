@@ -9,5 +9,14 @@
   <link href="chunks.css" rel="stylesheet"><link href="styles.css" rel="stylesheet"></head>
   <body>
     <div id="app"></div>
+    <script>
+      // Check that service workers are registered
+      if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+      </script>
   <script src="vendors.chunk.js"></script><script src="bundle.js"></script></body>
 </html>

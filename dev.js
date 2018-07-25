@@ -1,15 +1,19 @@
-const { resolve } = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { resolve }          = require('path');
+const webpack              = require('webpack');
+const HtmlWebpackPlugin    = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+
+const { InjectManifest }   = require('workbox-webpack-plugin')
+
+const fs = require('fs-extra')
 
 devPack = env => {
 
     console.log('打包dev');
 
-    // fs.removeSync('dev/public')
-    // fs.mkdir('dev/public', () => { })
-    // fs.mkdir('dev/public/source', () => { })
+    fs.removeSync('dist')
+    fs.mkdir('dist/public', () => { })
+    fs.copy('distData', 'dist')
 
     const port = env.port
 
@@ -30,7 +34,6 @@ devPack = env => {
             port: port,
             host: '0.0.0.0',
             contentBase: resolve(__dirname, 'dev'),
-            // publicPath: '/',
             hot: true,
             disableHostCheck: true
         },
@@ -75,6 +78,9 @@ devPack = env => {
         },
         plugins: [
             new webpack.NamedModulesPlugin(),
+            new InjectManifest({
+                swSrc: './public/sw.js',
+            }),
             new MiniCssExtractPlugin({
                 filename: "styles.css",
                 chunkFilename: "[id].css"
