@@ -1,7 +1,6 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 devPack = env => {
 
@@ -53,7 +52,7 @@ devPack = env => {
                 {
                     test: /\.css$/,
                     use: [
-                        MiniCssExtractPlugin.loader,
+                        "style-loader",
                         "css-loader",
                         "postcss-loader"
                     ]
@@ -61,7 +60,7 @@ devPack = env => {
                 {
                     test: /\.scss$/,
                     use: [
-                        MiniCssExtractPlugin.loader,
+                        "style-loader",
                         "css-loader",
                         "postcss-loader",
                         "sass-loader"
@@ -75,10 +74,6 @@ devPack = env => {
         },
         plugins: [
             new webpack.NamedModulesPlugin(),
-            new MiniCssExtractPlugin({
-                filename: "styles.css",
-                chunkFilename: "[id].css"
-            }),
             new HtmlWebpackPlugin({  
                 filename: 'index.html',
                 template: 'index.html',
