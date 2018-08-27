@@ -4,16 +4,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const fs = require('fs-extra')
+const { InjectManifest } = require('workbox-webpack-plugin')
 
+const fs = require('fs-extra')
 
 console.log('打包pro');
 
-// fs.removeSync('dist/public')
-// fs.mkdir('dist/public', () => { })
-// fs.mkdir('dist/public/source', () => { })
+fs.removeSync('dist')
+fs.mkdir('dist/public', () => { })
+fs.copy('distData', 'dist')
 
-module.exports = {
+module.exports = (env) => ({
     
     entry: {
         main: ['babel-polyfill', './index.js'],
@@ -78,9 +79,9 @@ module.exports = {
     optimization: {
         minimizer: [
             new UglifyJsPlugin({
-              cache: true,
-              parallel: true,
-              sourceMap: true // set to true if you want JS source maps
+                cache: true,
+                parallel: true,
+                sourceMap: true // set to true if you want JS source maps
             }),
             new OptimizeCSSAssetsPlugin({})
         ],
@@ -110,9 +111,12 @@ module.exports = {
             filename: 'index.html',
             template: 'index.html',
             title: 'NewWebpack',
-        })
+        }),
+        new InjectManifest({
+            swSrc: './public/sw.js',
+        }),
     ]
-}
+})
 
 
 
