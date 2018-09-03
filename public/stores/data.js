@@ -8,10 +8,10 @@ class DataStore {
     @observable dataList = []
 
     @action
-    setObs( array ) {
-        _.forEach( array, (x)=>{
-            this[ x[0] ] = x[1]
-        } )
+    setObs(keyValues) {
+        _.forIn(keyValues, ( value, key )=>{
+            this[ key ] = value
+        })
     }
 
 }
