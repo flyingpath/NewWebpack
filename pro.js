@@ -17,7 +17,7 @@ fs.copy('distData', 'dist')
 module.exports = (env) => ({
     
     entry: {
-        main: ['babel-polyfill', './index.js'],
+        main: './index.js',
         // vendor: [ 'react', 'react-dom', 'mobx', 'mobx-react', 'material-ui', 'styled-components' ]
     },
     output: {
