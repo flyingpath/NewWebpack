@@ -20,7 +20,7 @@ class Home extends React.Component {
     render() {
         return (
             <div >
-                1234
+                1234567
                 <img src={Ali} />
                 <i aria-hidden="true" className="heart icon" ></i>
             </div>
